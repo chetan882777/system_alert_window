@@ -59,38 +59,31 @@ class _MyAppState extends State<MyApp> {
           buttonPosition: ButtonPosition.TRAILING);
       SystemWindowBody body = SystemWindowBody(
         rows: [
-          EachRow(
-            columns: [
-              EachColumn(
-                text: SystemWindowText(text: "Some body", fontSize: 12, textColor: Colors.black45),
-              ),
-            ],
-            gravity: ContentGravity.CENTER,
-          ),
+
           EachRow(columns: [
             EachColumn(
-                text: SystemWindowText(text: "Long data of the body", fontSize: 12, textColor: Colors.black87, fontWeight: FontWeight.BOLD),
+                text: SystemWindowText(
+                    text: "fcm message",
+                    fontSize: 12,
+                    textColor: Colors.black87,
+                    fontWeight: FontWeight.BOLD),
                 padding: SystemWindowPadding.setSymmetricPadding(6, 8),
-                decoration: SystemWindowDecoration(startColor: Colors.black12, borderRadius: 25.0),
+                decoration: SystemWindowDecoration(
+                    startColor: Colors.black12, borderRadius: 25.0),
                 margin: SystemWindowMargin(top: 4)),
           ], gravity: ContentGravity.CENTER),
-          EachRow(
-            columns: [
-              EachColumn(
-                text: SystemWindowText(text: "Notes", fontSize: 10, textColor: Colors.black45),
-              ),
-            ],
-            gravity: ContentGravity.LEFT,
-            margin: SystemWindowMargin(top: 8),
-          ),
-          EachRow(
-            columns: [
-              EachColumn(
-                text: SystemWindowText(text: "Some random notes.", fontSize: 13, textColor: Colors.black54, fontWeight: FontWeight.BOLD),
-              ),
-            ],
-            gravity: ContentGravity.LEFT,
-          ),
+          EachRow(columns: [
+            EachColumn(
+                text: SystemWindowText(
+                    text: "#order id",
+                    fontSize: 12,
+                    textColor: Colors.black87,
+                    fontWeight: FontWeight.BOLD),
+                padding: SystemWindowPadding.setSymmetricPadding(6, 8),
+                decoration: SystemWindowDecoration(
+                    startColor: Colors.black12, borderRadius: 25.0),
+                margin: SystemWindowMargin(top: 4)),
+          ], gravity: ContentGravity.CENTER),
         ],
         padding: SystemWindowPadding(left: 16, right: 16, bottom: 12, top: 12),
       );

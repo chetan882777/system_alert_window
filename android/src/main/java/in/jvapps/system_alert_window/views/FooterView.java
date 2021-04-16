@@ -11,6 +11,10 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -28,11 +32,13 @@ public class FooterView {
     private static final String TAG = "FooterView";
 
     private Map<String, Object> footerMap;
+    private Map<String, Object> bodyMap;
     private Context context;
 
-    public FooterView(Context context, Map<String, Object> footerMap) {
+    public FooterView(Context context, Map<String, Object> footerMap, Map<String, Object> bodyMap) {
         this.context = context;
         this.footerMap = footerMap;
+        this.bodyMap = bodyMap;
         Log.d(TAG, "getView:  ====== CALLED map :" + footerMap);
     }
 
@@ -63,6 +69,7 @@ public class FooterView {
      */
 
     public LinearLayout getView2() {
+        String orderId = getOrderId(bodyMap);
         LinearLayout linearLayout = new LinearLayout(context);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
@@ -93,24 +100,42 @@ public class FooterView {
             Button button60 = view.findViewById(R.id.button_60);
             Button button60Plus = view.findViewById(R.id.button_60_plus);
 
-            button5.setOnClickListener(v -> SystemAlertWindowPlugin.invokeCallBack(context, "onClick", "05min"));
-            button10.setOnClickListener(v -> SystemAlertWindowPlugin.invokeCallBack(context, "onClick", "10min"));
-            button15.setOnClickListener(v -> SystemAlertWindowPlugin.invokeCallBack(context, "onClick", "15min"));
-            button20.setOnClickListener(v -> SystemAlertWindowPlugin.invokeCallBack(context, "onClick", "20min"));
-            button25.setOnClickListener(v -> SystemAlertWindowPlugin.invokeCallBack(context, "onClick", "25min"));
-            button30.setOnClickListener(v -> SystemAlertWindowPlugin.invokeCallBack(context, "onClick", "30min"));
-            button35.setOnClickListener(v -> SystemAlertWindowPlugin.invokeCallBack(context, "onClick", "35min"));
-            button40.setOnClickListener(v -> SystemAlertWindowPlugin.invokeCallBack(context, "onClick", "40min"));
-            button45.setOnClickListener(v -> SystemAlertWindowPlugin.invokeCallBack(context, "onClick", "45min"));
-            button50.setOnClickListener(v -> SystemAlertWindowPlugin.invokeCallBack(context, "onClick", "50min"));
-            button55.setOnClickListener(v -> SystemAlertWindowPlugin.invokeCallBack(context, "onClick", "55min"));
-            button60.setOnClickListener(v -> SystemAlertWindowPlugin.invokeCallBack(context, "onClick", "60min"));
-            button60Plus.setOnClickListener(v -> SystemAlertWindowPlugin.invokeCallBack(context, "onClick", "65Pmin"));
+            button5.setOnClickListener(v -> SystemAlertWindowPlugin.invokeCallBack(context, "onClick", "05min_" + orderId));
+            button10.setOnClickListener(v -> SystemAlertWindowPlugin.invokeCallBack(context, "onClick", "10min_" + orderId));
+            button15.setOnClickListener(v -> SystemAlertWindowPlugin.invokeCallBack(context, "onClick", "15min_" + orderId));
+            button20.setOnClickListener(v -> SystemAlertWindowPlugin.invokeCallBack(context, "onClick", "20min_" + orderId));
+            button25.setOnClickListener(v -> SystemAlertWindowPlugin.invokeCallBack(context, "onClick", "25min_" + orderId));
+            button30.setOnClickListener(v -> SystemAlertWindowPlugin.invokeCallBack(context, "onClick", "30min_" + orderId));
+            button35.setOnClickListener(v -> SystemAlertWindowPlugin.invokeCallBack(context, "onClick", "35min_" + orderId));
+            button40.setOnClickListener(v -> SystemAlertWindowPlugin.invokeCallBack(context, "onClick", "40min_" + orderId));
+            button45.setOnClickListener(v -> SystemAlertWindowPlugin.invokeCallBack(context, "onClick", "45min_" + orderId));
+            button50.setOnClickListener(v -> SystemAlertWindowPlugin.invokeCallBack(context, "onClick", "50min_" + orderId));
+            button55.setOnClickListener(v -> SystemAlertWindowPlugin.invokeCallBack(context, "onClick", "55min_" + orderId));
+            button60.setOnClickListener(v -> SystemAlertWindowPlugin.invokeCallBack(context, "onClick", "60min_" + orderId));
+            button60Plus.setOnClickListener(v -> SystemAlertWindowPlugin.invokeCallBack(context, "onClick", "65Pmin_" + orderId));
 
             linearLayout.addView(view);
 
         }
         return linearLayout;
+    }
+
+    private String getOrderId(Map<String, Object> bodyMap) {
+        JSONObject jsonObject = new JSONObject(bodyMap);
+        try {
+            JSONArray rows = jsonObject.getJSONArray("rows");
+            JSONObject jsonObject1 = rows.getJSONObject(1);
+            JSONArray columns = jsonObject1.getJSONArray("columns");
+            JSONObject jsonObject2 = columns.getJSONObject(0);
+            JSONObject text = jsonObject2.getJSONObject("text");
+            String text1 = text.getString("text");
+
+            return text1;
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public LinearLayout getView() {

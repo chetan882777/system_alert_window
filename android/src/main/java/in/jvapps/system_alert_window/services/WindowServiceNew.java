@@ -140,7 +140,7 @@ public class WindowServiceNew extends Service implements View.OnTouchListener {
         if (bodyMap != null)
             bodyView = new BodyView(mContext, bodyMap).getView();
         if (footerMap != null)
-            footerView = new FooterView(mContext, footerMap).getView();
+            footerView = new FooterView(mContext, footerMap, bodyMap).getView();
     }
 
     private WindowManager.LayoutParams getLayoutParams() {
